@@ -46,7 +46,7 @@ var listener = app.listen(process.env.PORT, function () {
 //   res.json({ unix: unixTimestamp, utc: utcTimestamp });
 // });
 
-app.get("/api/:date", function (req, res) {
+app.get("/api/:date?", function (req, res) {
   const date = req.params.date;
   console.log("date" + date);
 
