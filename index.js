@@ -29,3 +29,10 @@ var listener = app.listen(process.env.PORT, function () {
   const now = Date.now(); // Unix timestamp in milliseconds
   console.log(now);
 });
+
+app.get("/api/:date", function (req, res) {
+  const date = req.params.date;
+  console.log(date);
+  const unixTimestamp = new Date(date).getTime();
+  res.json({ unix: unixTimestamp });
+});
