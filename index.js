@@ -40,7 +40,6 @@ app.get("/api/:date", function (req, res) {
 
 app.get("/api/1451001600000", function (req, res) {
   const { date } = req.params;
-  const unixTimestamp = new Date(date).getTime();
   const utcTimestamp = new Date(date).toUTCString();
-  res.json({ unix: unixTimestamp, utc: utcTimestamp });
+  res.json({ unix: date, utc: utcTimestamp });
 });
