@@ -30,43 +30,43 @@ var listener = app.listen(process.env.PORT, function () {
   // console.log(now);
 });
 
-app.get("/api/:date", function (req, res) {
-  const date = req.params.date;
-  console.log("req.params.date =" + date);
-
-  let unixTimestamp, utcTimestamp;
-
-  if (!isNaN(Number(date))) {
-    unixTimestamp = new Date(Number(date)).getTime();
-  } else {
-    unixTimestamp = new Date(date).getTime();
-  }
-
-  utcTimestamp = new Date(date).toUTCString();
-  res.json({ unix: unixTimestamp, utc: utcTimestamp });
-});
-
-// app.get("/api/:date", (req, res) => {
+// app.get("/api/:date", function (req, res) {
 //   const date = req.params.date;
-//   console.log("date" + date);
+//   console.log("req.params.date =" + date);
 
-//   let dateObject;
+//   let unixTimestamp, utcTimestamp;
 
-//   if (!isNaN(date)) {
-//     // If it's a timestamp, convert it to a number first and create a Date object
-//     dateObject = new Date(Number(date));
+//   if (!isNaN(Number(date))) {
+//     unixTimestamp = new Date(Number(date)).getTime();
 //   } else {
-//     // If it's a date string, simply create a Date object
-//     dateObject = new Date(date);
-//   }
-//   console.log("dateObject" + dateObject);
-
-//   if (isNaN(dateObject.getTime())) {
-//     return res.json({ error: "Invalid date" });
+//     unixTimestamp = new Date(date).getTime();
 //   }
 
-//   const unixTimestamp = dateObject.getTime();
-//   const utcTimestamp = dateObject.toUTCString();
-
+//   utcTimestamp = new Date(date).toUTCString();
 //   res.json({ unix: unixTimestamp, utc: utcTimestamp });
 // });
+
+app.get("/api/:date", function (req, res) {
+  const date = req.params.date;
+  console.log("date" + date);
+
+  let dateObject;
+
+  if (!isNaN(date)) {
+    // If it's a timestamp, convert it to a number first and create a Date object
+    dateObject = new Date(Number(date));
+  } else {
+    // If it's a date string, simply create a Date object
+    dateObject = new Date(date);
+  }
+  console.log("dateObject" + dateObject);
+
+  if (isNaN(dateObject.getTime())) {
+    return res.json({ error: "Invalid date" });
+  }
+
+  const unixTimestamp = dateObject.getTime();
+  const utcTimestamp = dateObject.toUTCString();
+
+  res.json({ unix: unixTimestamp, utc: utcTimestamp });
+});
