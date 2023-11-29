@@ -36,7 +36,7 @@ var listener = app.listen(process.env.PORT, function () {
 
 //   let unixTimestamp, utcTimestamp;
 
-//   if (!isNaN(Number(date))) {
+//   if (typeof date === "number") {
 //     unixTimestamp = new Date(Number(date)).getTime();
 //   } else {
 //     unixTimestamp = new Date(date).getTime();
