@@ -48,12 +48,10 @@ var listener = app.listen(process.env.PORT, function () {
 
 app.get("/api/:date?", function (req, res) {
   const date = req.params.date;
-  console.log("date" + date);
 
   if (!date) {
     // If no date is provided, use the current time
     const currentDate = new Date();
-    console.log("EMPTY");
     const response = {
       unix: currentDate.getTime(),
       utc: currentDate.toUTCString(),
@@ -70,7 +68,6 @@ app.get("/api/:date?", function (req, res) {
     // If it's a date string, simply create a Date object
     dateObject = new Date(date);
   }
-  console.log("dateObject" + dateObject);
 
   if (isNaN(dateObject.getTime())) {
     return res.json({ error: "Invalid date" });
