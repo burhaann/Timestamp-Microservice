@@ -36,7 +36,7 @@ app.get("/api/:date", function (req, res) {
 
   let unixTimestamp, utcTimestamp;
 
-  if (!isNaN(date)) {
+  if (!isNaN(Number(date))) {
     unixTimestamp = new Date(Number(date)).getTime();
   } else {
     unixTimestamp = new Date(date).getTime();
