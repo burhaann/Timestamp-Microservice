@@ -46,10 +46,10 @@ var listener = app.listen(process.env.PORT, function () {
 app.get("/api/:date", (req, res) => {
   const date = req.params.date;
 
-  if (!date) {
-    // Handle case where no date is provided
-    return res.json({ error: "Invalid date" });
-  }
+  // if (!date) {
+  //   // Handle case where no date is provided
+  //   return res.json({ error: "Invalid date" });
+  // }
 
   let dateObject;
 
@@ -63,9 +63,9 @@ app.get("/api/:date", (req, res) => {
   }
 
   // Check if the date is valid
-  // if (isNaN(dateObject.getTime())) {
-  //   return res.json({ error: "Invalid date" });
-  // }
+  if (isNaN(dateObject.getTime())) {
+    return res.json({ error: "Invalid date" });
+  }
 
   const unixTimestamp = dateObject.getTime();
   const utcTimestamp = dateObject.toUTCString();
