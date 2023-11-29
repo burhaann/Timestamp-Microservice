@@ -36,4 +36,9 @@ app.get("/api/:date", function (req, res) {
   const unixTimestamp = new Date(date).getTime();
   const utcTimestamp = new Date(date).toUTCString();
   res.json({ unix: unixTimestamp, utc: utcTimestamp });
+
+  if (typeof date === "number") {
+    const unixTime = new Date(date).setTime();
+    res.json({ unix: unixTime, utc: utcTimestamp });
+  }
 });
