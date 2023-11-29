@@ -30,15 +30,48 @@ var listener = app.listen(process.env.PORT, function () {
   // console.log(now);
 });
 
-app.get("/api/:date", function (req, res) {
-  const date = req.params.date;
-  console.log("req.params.date =" + date);
-  const unixTimestamp = new Date(date).getTime();
-  const utcTimestamp = new Date(date).toUTCString();
-  res.json({ unix: unixTimestamp, utc: utcTimestamp });
+// app.get("/api/:date", function (req, res) {
+//   const date = req.params.date;
+//   console.log("req.params.date =" + date);
+//   const unixTimestamp = new Date(date).getTime();
+//   const utcTimestamp = new Date(date).toUTCString();
+//   res.json({ unix: unixTimestamp, utc: utcTimestamp });
 
-  if (typeof date === "number") {
-    const unixTime = new Date(date).setTime();
-    res.json({ unix: unixTime, utc: utcTimestamp });
+//   if (typeof date === "number") {
+//     const unixTime = new Date(date).setTime();
+//     res.json({ unix: unixTime, utc: utcTimestamp });
+//   }
+// });
+app.get("/api/:date?", (req, res) => {
+  const inputDate = req.params.date;
+
+  if (!inputDate) {
+    // Handle case where no date is provided
+    return res.json({ error: "Invalid date" });
   }
+
+  let dateObject;
+
+  // Check if the provided date can be successfully parsed
+  if (!isNaN(inputDate)) {
+    // If it's a timestamp, convert it to a number and create a Date object
+    dateObject = new Date(Number(inputDate));
+  } else {
+    // If it's a date string, create a Date object
+    dateObject = new Date(inputDate);
+  }
+
+  // Check if the date is valid
+  if (isNaN(dateObject.getTime())) {
+    return res.json({ error: "Invalid date" });
+  }
+
+  // Format the response
+  const response = {
+    unix: dateObject.getTime(),
+    utc: dateObject.toUTCString(),
+  };
+
+  // Send the response
+  res.json(response);
 });
