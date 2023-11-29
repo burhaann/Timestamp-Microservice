@@ -30,18 +30,18 @@ var listener = app.listen(process.env.PORT, function () {
   // console.log(now);
 });
 
-app.get("/api/:date", function (req, res) {
-  const date = req.params.date;
-  console.log("req.params.date =" + date);
-  const unixTimestamp = new Date(date).getTime();
-  const utcTimestamp = new Date(date).toUTCString();
-  res.json({ unix: unixTimestamp, utc: utcTimestamp });
+// app.get("/api/:date", function (req, res) {
+//   const date = req.params.date;
+//   console.log("req.params.date =" + date);
+//   const unixTimestamp = new Date(date).getTime();
+//   const utcTimestamp = new Date(date).toUTCString();
+//   res.json({ unix: unixTimestamp, utc: utcTimestamp });
 
-  if (typeof date === "number") {
-    const unixTime = new Date(date).setTime();
-    res.json({ unix: unixTime, utc: utcTimestamp });
-  }
-});
+//   if (typeof date === "number") {
+//     const unixTime = new Date(date).setTime();
+//     res.json({ unix: unixTime, utc: utcTimestamp });
+//   }
+// });
 
 app.get("/api/:date", (req, res) => {
   const date = req.params.date;
