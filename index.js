@@ -38,8 +38,8 @@ app.get("/api/:date", function (req, res) {
   res.json({ unix: unixTimestamp, utc: utcTimestamp });
 });
 
-app.get("/api/1451001600000", function (req, res) {
-  const date = 1451001600000;
+app.get("/api/:unixdate", function (req, res) {
+  const date = req.params.unixdate;
   const utcTimestamp = new Date(date).toUTCString();
   res.json({ unix: date, utc: utcTimestamp });
 });
