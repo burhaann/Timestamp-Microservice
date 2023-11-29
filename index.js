@@ -47,26 +47,26 @@ var listener = app.listen(process.env.PORT, function () {
 // });
 
 app.get("/api/:date", function (req, res) {
-  const inputDate = req.params.date;
+  const date = req.params.date;
   console.log("date" + date);
 
-  let date;
+  let dateObject;
 
-  if (!isNaN(inputDate)) {
+  if (!isNaN(date)) {
     // If it's a timestamp, convert it to a number first and create a Date object
-    date = new Date(Number(inputDate));
+    dateObject = new Date(Number(date));
   } else {
     // If it's a date string, simply create a Date object
-    date = new Date(inputDate);
+    dateObject = new Date(date);
   }
-  console.log("date" + date);
+  console.log("dateObject" + dateObject);
 
-  if (isNaN(date.getTime())) {
+  if (isNaN(dateObject.getTime())) {
     return res.json({ error: "Invalid date" });
   }
 
-  const unixTimestamp = date.getTime();
-  const utcTimestamp = date.toUTCString();
+  const unixTimestamp = dateObject.getTime();
+  const utcTimestamp = dateObject.toUTCString();
 
   res.json({ unix: unixTimestamp, utc: utcTimestamp });
 });
