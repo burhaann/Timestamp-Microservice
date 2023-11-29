@@ -57,7 +57,7 @@ app.get("/api/:date", function (req, res) {
       unix: currentDate.getTime(),
       utc: currentDate.toUTCString(),
     };
-    return res.json(response);
+    res.json(response);
   }
 
   let dateObject;
