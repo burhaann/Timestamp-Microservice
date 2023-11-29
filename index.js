@@ -26,13 +26,14 @@ app.get("/api/hello", function (req, res) {
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
   console.log("Your app is listening on port " + listener.address().port);
-  const now = Date.now(); // Unix timestamp in milliseconds
-  console.log(now);
+  // const now = Date.now(); // Unix timestamp in milliseconds
+  // console.log(now);
 });
 
 app.get("/api/:date", function (req, res) {
   const date = req.params.date;
-  console.log(date);
+  console.log("req.params.date =" + date);
   const unixTimestamp = new Date(date).getTime();
-  res.json({ unix: unixTimestamp });
+  const utcTimestamp = new Date(unixTimestamp).setUTCDate();
+  res.json({ unix: unixTimestamp, utc: unixTimestamp });
 });
