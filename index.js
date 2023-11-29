@@ -50,6 +50,16 @@ app.get("/api/:date", function (req, res) {
   const date = req.params.date;
   console.log("date" + date);
 
+  if (!date) {
+    // If no date is provided, use the current time
+    const currentDate = new Date();
+    const response = {
+      unix: currentDate.getTime(),
+      utc: currentDate.toUTCString(),
+    };
+    return res.json(response);
+  }
+
   let dateObject;
 
   if (!isNaN(date)) {
