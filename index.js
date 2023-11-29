@@ -53,6 +53,7 @@ app.get("/api/:date", function (req, res) {
   if (!date) {
     // If no date is provided, use the current time
     const currentDate = new Date();
+    console.log("EMPTY");
     const response = {
       unix: currentDate.getTime(),
       utc: currentDate.toUTCString(),
