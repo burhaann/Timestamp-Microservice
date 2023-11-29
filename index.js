@@ -32,11 +32,11 @@ var listener = app.listen(process.env.PORT, function () {
 
 app.get("/api/:date", function (req, res) {
   const date = req.params.date;
-  console.log("req.params.date =" + isNaN(date));
+  console.log("req.params.date =" + date);
 
   let unixTimestamp, utcTimestamp;
 
-  if (typeof date === "number") {
+  if (!isNaN(date)) {
     unixTimestamp = new Date(Number(date)).getTime();
   } else {
     unixTimestamp = new Date(date).getTime();
